@@ -44,19 +44,21 @@ const play = (value) => {
         isPlaying = false;
         input.placeholder="새로 시작 1, 종료 2"
         logGenerator(`${count}번째 시도: ${strike}strike(s), ${ball}ball(s)`);
-        logGenerator(`3개의 숫자를 모두 맞히셨습니다! 게임 종료!`);
+        logGenerator(`🎉 3개의 숫자를 모두 맞히셨습니다! 게임 종료!`);
         logGenerator(`게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.`);
-        alert("3개의 숫자를 모두 맞히셨습니다! 게임 종료!\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+        setTimeout(() => alert("🎉 3개의 숫자를 모두 맞히셨습니다! 게임 종료!\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."), 1500);
+        input.value=''
     } else {
         logGenerator(`${count}번째 시도: ${strike}strike(s), ${ball}ball(s)`);
     };
 
-    if (count === 10) {
+    if (count === 3) {
         isPlaying = false;
         input.placeholder="새로 시작 1, 종료 2";
-        logGenerator(`10번의 기회를 모두 소진하여 게임이 종료됩니다.`);
+        logGenerator(`🔆 10번의 기회를 모두 소진하여 게임이 종료됩니다.`);
         logGenerator(`게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.`);
-        alert("10번의 기회를 모두 소진하여 게임이 종료됩니다.\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+        setTimeout(() => alert("🔆 10번의 기회를 모두 소진하여 게임이 종료됩니다.\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."), 1500);
+        input.value=''
     }
 };
 
