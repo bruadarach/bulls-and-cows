@@ -12,7 +12,7 @@ const randomNumberGenerator = () => {
         let randomNum = String(Math.floor((Math.random() * 9) + 1));
         if (threeNums.indexOf(randomNum) === -1) {
             threeNums += randomNum;
-        } ;
+        };
     };
     console.log(threeNums);
 };
@@ -41,11 +41,12 @@ const play = (value) => {
     if (strike === 0 && ball === 3) {
         logGenerator(`${count}번째 시도: nothing!`);
     } else if (strike === 3 && ball === 0) {
+        isPlaying = false;
         input.placeholder="새로 시작 1, 종료 2"
         logGenerator(`${count}번째 시도: ${strike}strike(s), ${ball}ball(s)`);
         logGenerator(`3개의 숫자를 모두 맞히셨습니다! 게임 종료!`);
         logGenerator(`게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.`);
-        isPlaying = false;
+        alert("3개의 숫자를 모두 맞히셨습니다! 게임 종료!\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
     } else {
         logGenerator(`${count}번째 시도: ${strike}strike(s), ${ball}ball(s)`);
     };
@@ -79,32 +80,40 @@ const restartValidation = (value) => {
     }
 }
 
+const logRemover = () => {
+    while(logDetail.hasChildNodes()) {
+        logDetail.removeChild(logDetail.firstChild);
+    };
+}
+
 button.addEventListener('click', (e) => {
     e.preventDefault();
-    input.placeholder="숫자 3개를 입력해주세요.";
 
     if (isPlaying && count <= 10) {
-    logGenerator(`숫자를 입력해주세요: ${input.value}`);
-    validationCheck(input.value);
-    input.value='';
+        input.placeholder="숫자 3개를 입력해주세요.";
+        logGenerator(`숫자를 입력해주세요: ${input.value}`);
+        validationCheck(input.value);
+        input.value='';
+
     } else {
         count = 0;
-
-        while(logDetail.hasChildNodes()) {
-            logDetail.removeChild(logDetail.firstChild);
-        };
-
         if (restartValidation(input.value)) {
             if (input.value === '1') {
                 isPlaying = true;
+                logRemover();
                 input.value =  '';
                 threeNums = '';
+                input.placeholder="숫자 3개를 입력해주세요.";
             } else if (input.value === '2') {
-                input.disabled = true;
+                logRemover();
                 logGenerator(`게임을 종료합니다.`);
+                input.value = '';
+                input.placeholder="게임 종료.";
+                input.disabled = true;
             };
+            
         } else {
             alert("숫자 1 또는 2를 입력해주세요.");
-        }
-    } 
+        };
+    };
 });
